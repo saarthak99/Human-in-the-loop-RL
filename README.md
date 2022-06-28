@@ -130,7 +130,7 @@ pip install -e .
 3. Other files in `hmn_adv_saferl` folder are used to initialize, run the algorithms descirbed above
 4. `scripts/point`: It has the scripts to simulate the method on the Point Robot simulator. The folders and files mentioned in this are are explained as follows:
 	- `npz`: Gives the input data required for the training of the algorithm
-	- `intv` and `model`: the final intervention and model parameter values are stored here in `yaml` files. We choose the `small.yaml` in the training the part but we can go with `unbiased.yaml` as well which helps in reduction of the bias of the PPO, constrained PPO but we do not go into that
+	- `intv` and `model`: the final intervention and model parameter values are stored here in `yaml` files. We choose the `unbiased.yaml` in the training the part as i removes the bias in PPO, constrained PPO network training as default but we can go with `small.yaml` as well.
 	- `cppo.py` and `csc.py` are the algorithms used for the training
 	- `q_and_v.py`: used for the training of the value and state-value function with the human involvement
 	- `train_point_critics.py`: trains the critic network
