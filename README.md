@@ -118,14 +118,15 @@ pip install -e .
 ### Folders and files
 
 1. `extra_envs`: Has three folders for envs, wrappers and interveners. They are explained as follows:
-        - `envs`: Has the point env
-        - `wrappers`: Used as intervention wrapper. `step` is used to check if agent should intervene. If it is not required then we `step` the internal env. Otherwise, NaN is returned and `done` flag is set to `True`. If intervener gives safe action, dic `info` hhas the `step` output when safe action is applied to the internal env from intervener
-        - `intervener`: Intervention rule G wiht the human intervention for point env. It contains `should_intervene` method to decide whether action requires intervention. `safe_action` returns safe action from the policy. For the poin env, we have two interveners described as follows:
-                - `PointIntervenerNetwork`: Uses V and Q approximators to build advantage function estimate. Networks loaded using PyTorch
-                - `PointIntervenerRollout`: Gives deceleration policy to model of env to build estimate
+	- `envs`: Has the point env
+	- `wrappers`: Used as intervention wrapper. `step` is used to check if agent should intervene. If it is not required then we `step` the internal env. Otherwise, NaN is returned and `done` flag is set to `True`. If intervener gives safe action, dic `info` hhas the `step` output when safe action is applied to the internal env from intervener
+	- `intervener`: Intervention rule G wiht the human intervention for point env. It contains `should_intervene` method to decide whether action requires intervention. `safe_action` returns safe action from the policy. For the poin env, we have two interveners described as follows:
+		- `PointIntervenerNetwork`: Uses V and Q approximators to build advantage function estimate. Networks loaded using PyTorch
+		- `PointIntervenerRollout`: Gives deceleration policy to model of env to build estimate
 2. `hmn_adv_saferl/algos`:
-        - `cppo`: PPO algorithm modified for the constrained/safe setting. Our implementation maintains a value function for the reward and a value function to predict the constraint cost or an intervention (here, overloaded into the same scalar). Thus, CPPO can be used for both the constrained setting where a Lagrange multiplier is optimized and the unconstrained safe setting where we receive a fixed penalty for an intervention.
-        - `csc`: constrained PPO algorithm but with a state-action critic used for the cost in place of the state critic. The state-action "safety" critic is used to filter out unsafe proposed actions, and is trained in a conservative fashion to make the agent more safe.
-3. 
+	- `cppo`: PPO algorithm modified for the constrained/safe setting. Our implementation maintains a value function for the reward and a value function to predict the constraint cost or an intervention (here, overloaded into the same scalar). Thus, CPPO can be used for both the constrained setting where a Lagrange multiplier is optimized and the unconstrained safe setting where we receive a fixed penalty for an intervention.
+	- `csc`: constrained PPO algorithm but with a state-action critic used for the cost in place of the state critic. The state-action "safety" critic is used to filter out unsafe proposed actions, and is trained in a conservative fashion to make the agent more safe.
+3. Other files in `hmn_adv_saferl` folder are used to initialize, run the algorithms descirbed above
+4. 
 
 
