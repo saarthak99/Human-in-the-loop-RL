@@ -1,0 +1,14 @@
+cloudpickle==1.2.1
+gym[atari,box2d,classic_control]
+ipython
+joblib
+matplotlib
+mpi4py
+numpy
+pandas
+pytest
+psutil
+pyyaml
+scipy
+torch==1.11.0
+tqdm
