@@ -129,7 +129,7 @@ pip install -e .
 	- `csc`: constrained PPO algorithm but with a state-action critic used for the cost in place of the state critic. The state-action "safety" critic is used to filter out unsafe proposed actions, and is trained in a conservative fashion to make the agent more safe.
 3. Other files in `hmn_adv_saferl` folder are used to initialize, run the algorithms descirbed above
 4. `scripts/point`: It has the scripts to simulate the method on the Point Robot simulator. The folders and files mentioned in this are are explained as follows:
-	- `npz`: Gives the input data required for the training of the algorithm
+	- `npz`: Gives the input data required for the training of the algorithm. We need to download a file mentioned in README in the `npz` folder. Not added here as it is a huge one
 	- `intv` and `model`: the final intervention and model parameter values are stored here in `yaml` files. We choose the `unbiased.yaml` in the training the part as i removes the bias in PPO, constrained PPO network training as default but we can go with `small.yaml` as well.
 	- `cppo.py` and `csc.py` are the algorithms used for the training
 	- `q_and_v.py`: used for the training of the value and state-value function with the human involvement
