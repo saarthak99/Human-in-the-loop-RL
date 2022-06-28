@@ -100,14 +100,14 @@ Code based on [OpenAI](https://github.com/openai/)'s [Spinning Up](https://spinn
 ### Setting up
 
 We follow the instructions given in https://spinningup.openai.com/en/latest/user/installation.html. Except for following parts, we follow the link as it is:
-	- Replace `conda create -n spinningup python=3.6` and `conda activate spinningup` with `conda create -n hmn_adv_safe python=3.6` and `conda activate hmn_adv_safe`, respectively.
-	- Instead of the "Installing Spinning Up" section, run the following:
-    ```
-    cd Human_Adv_SafeRL
-    pip install -e .
-    ```
-	- Install MuJoCo in the same manner as shown in the previous part of this README.md and initiate in this <code> hmn_adv_safe </code> virtual env
-	- Rest of the link needs to be followed as it is
+- Replace `conda create -n spinningup python=3.6` and `conda activate spinningup` with `conda create -n hmn_adv_safe python=3.6` and `conda activate hmn_adv_safe`, respectively.
+- Instead of the "Installing Spinning Up" section, run the following:
+```
+cd Human_Adv_SafeRL
+pip install -e .
+```
+- Install MuJoCo in the same manner as shown in the previous part of this README.md and initiate in this <code> hmn_adv_safe </code> virtual env
+- Rest of the link needs to be followed as it is
 
 
 Go to the `extra_envs` directory and install it to expose those environments to Gym.
