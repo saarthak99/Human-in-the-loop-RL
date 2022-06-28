@@ -91,7 +91,7 @@ cd ~/HumanTD3
 
 Evaluations are peformed every 5000 time steps, over a total of 1 million time steps. The results of the simulations are stored in the <code> results </code> folder. These can be further  utilized to plot learning curves and visualize the same.
 
-========================================================================
+------------------------------------------------------
 
 ## Advantage-based Intervention with human-in-the-loop 
 
