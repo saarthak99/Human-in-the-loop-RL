@@ -67,19 +67,23 @@ Once we are done setting up MuJoCo, we move to the <code> HumanTD3 </code> folde
 
 ### Files
 
-<code> TD3.py </code>: Base code of the TD3 RL agent
-<code> HumanTD3.py </code>: This gives us the modified TD3 base algorithm with the human involvement. This takes the input and updates the value function, loss functions based on the changes presented in the paper.
-<code> main.py </code>: This python file is used for the implementation of the code presented in the previous two files where we give values to the hyper-parameters for the algorithms and also choose which policy to implement.
-<code> utils.py </code>: Defines the variables used
+- <code> TD3.py </code>: Base code of the TD3 RL agent <br>
+- <code> HumanTD3.py </code>: This gives us the modified TD3 base algorithm with the human involvement. This takes the input and updates the value function, loss functions based on the changes presented in the paper. <br>
+- <code> main.py </code>: This python file is used for the implementation of the code presented in the previous two files where we give values to the hyper-parameters for the algorithms and also choose which policy to implement. <br>
+- <code> utils.py </code>: Defines the variables used
 
 Experiments on single environments can be run by calling:
 ```
+conda activate mujoco_py
+cd ~/HumanTD3
 python main.py --policy HumanTD3 --env Hopper-v2
 ```
 Here, the policy caan be chosen between TD3, HumanTD3.
 
 For running the simulations and get the results for both the algorithms together, the following shell file can be run after initializing it with <code> chmod </code>
 ```
+conda activate mujoco_py
+cd ~/HumanTD3
 ./run_experiments.sh
 ```
 
@@ -87,7 +91,41 @@ For running the simulations and get the results for both the algorithms together
 
 Evaluations are peformed every 5000 time steps, over a total of 1 million time steps. The results of the simulations are stored in the <code> results </code> folder. These can be further  utilized to plot learning curves and visualize the same.
 
+========================================================================
+
 ## Advantage-based Intervention with human-in-the-loop 
 
+Code based on [OpenAI](https://github.com/openai/)'s [Spinning Up](https://spinningup.openai.com). So for this, we need to setup SpinningUp to proceed.
+
+### Setting up
+
+We follow the instructions given in https://spinningup.openai.com/en/latest/user/installation.html. Except for following parts, we follow the link as it is:
+    - Replace `conda create -n spinningup python=3.6` and `conda activate spinningup` with `conda create -n hmn_adv_safe python=3.6` and `conda activate hmn_adv_safe`, respectively.
+	- Instead of the "Installing Spinning Up" section, run the following:
+    ```
+    cd Human_Adv_SafeRL
+    pip install -e .
+    ```
+    - Install MuJoCo in the same manner as shown in the previous part of this README.md and initiate in this <code> hmn_adv_safe </code> virtual env
+    - Rest of the link needs to be followed as it is
+
+Go to the `extra_envs` directory and install it to expose those environments to Gym.
+```
+cd extra_envs
+pip install -e .
+```
+
+### Folders and files
+
+1. `extra_envs`: Has three folders for envs, wrappers and interveners. They are explained as follows:
+        - `envs`: Has the point env
+        - `wrappers`: Used as intervention wrapper. `step` is used to check if agent should intervene. If it is not required then we `step` the internal env. Otherwise, NaN is returned and `done` flag is set to `True`. If intervener gives safe action, dic `info` hhas the `step` output when safe action is applied to the internal env from intervener
+        - `intervener`: Intervention rule G wiht the human intervention for point env. It contains `should_intervene` method to decide whether action requires intervention. `safe_action` returns safe action from the policy. For the poin env, we have two interveners described as follows:
+                - `PointIntervenerNetwork`: Uses V and Q approximators to build advantage function estimate. Networks loaded using PyTorch
+                - `PointIntervenerRollout`: Gives deceleration policy to model of env to build estimate
+2. `hmn_adv_saferl/algos`:
+        - `cppo`: PPO algorithm modified for the constrained/safe setting. Our implementation maintains a value function for the reward and a value function to predict the constraint cost or an intervention (here, overloaded into the same scalar). Thus, CPPO can be used for both the constrained setting where a Lagrange multiplier is optimized and the unconstrained safe setting where we receive a fixed penalty for an intervention.
+        - `csc`: constrained PPO algorithm but with a state-action critic used for the cost in place of the state critic. The state-action "safety" critic is used to filter out unsafe proposed actions, and is trained in a conservative fashion to make the agent more safe.
+3. 
 
 
