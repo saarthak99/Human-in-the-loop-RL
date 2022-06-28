@@ -32,8 +32,8 @@ Then do <code> source .bashrc </code>
 
 Test that the library is installed by going into:
 '''
-         cd ~/.mujoco/mujoco210/bin
-        ./simulate ../model/humanoid.xml
+     cd ~/.mujoco/mujoco210/bin
+    ./simulate ../model/humanoid.xml
 '''
 
 Install mujoco-py:
@@ -44,12 +44,13 @@ Install mujoco-py:
     sudo apt-get install patchelf
     sudo apt-get install python3-dev build-essential libssl-dev libffi-dev libxml2-dev  
     sudo apt-get install libxslt1-dev zlib1g-dev libglew1.5 libglew-dev python3-pip
-    
+'''
+
+'''
     git clone https://github.com/openai/mujoco-py
     cd mujoco-py
     pip install -r requirements.txt
     pip install -r requirements.dev.txt
-
     pip3 install -e . --no-cache
 '''
 
