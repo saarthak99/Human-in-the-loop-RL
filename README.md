@@ -128,6 +128,26 @@ pip install -e .
 	- `cppo`: PPO algorithm modified for the constrained/safe setting. Our implementation maintains a value function for the reward and a value function to predict the constraint cost or an intervention (here, overloaded into the same scalar). Thus, CPPO can be used for both the constrained setting where a Lagrange multiplier is optimized and the unconstrained safe setting where we receive a fixed penalty for an intervention.
 	- `csc`: constrained PPO algorithm but with a state-action critic used for the cost in place of the state critic. The state-action "safety" critic is used to filter out unsafe proposed actions, and is trained in a conservative fashion to make the agent more safe.
 3. Other files in `hmn_adv_saferl` folder are used to initialize, run the algorithms descirbed above
-4. 
+4. `scripts/point`: It has the scripts to simulate the method on the Point Robot simulator. The folders and files mentioned in this are are explained as follows:
+	- `npz`: Gives the input data required for the training of the algorithm
+	- `intv` and `model`: the final intervention and model are stored here in `yaml` files
+	- `cppo.py` and `csc.py` are the algorithms used for the training
+	- `q_and_v.py`: used for the training of the value and state-value function with the human involvement
+	- `train_point_critics.py`: trains the critic network
+	- `script.sh`: used to train the whole algorithm with the help of the python files in `scripts`
 
+### Results
+
+Results can be obtained for the point robot simulation by running the following shell script after initiliazing the `chmod`:
+```
+cd ~/Human_Adv_SafeRL/scripts/point
+./script.sh
+```
+
+After running the scripts, the results are stored in `/data`.
+Results can be plotted using the "Spinning Up" plotting tool (with `spinup.run` replaced with `hmn_adv_saferl.run`): https://spinningup.openai.com/en/latest/user/plotting.html. This is how we get the results mentioned in the project report
+
+-----------------------------------------------------
+
+For the policy known human intervention model, the previous simulation files were corrupted so it was not possible to retrieve them and submit as part of this repository.
 
